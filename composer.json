@@ -1,0 +1,15 @@
+{
+    "require-dev": {
+        "pestphp/pest": "^2.30"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "autoload": {
+        "files": [
+            "src/multi-byte-wordwrap.php"
+        ]
+    }
+}
