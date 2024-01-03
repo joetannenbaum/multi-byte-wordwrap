@@ -10,6 +10,16 @@ test('will match wordwrap', function () {
     expect($mbResult)->toBe($result);
 });
 
+test('will match wordwrap on shorter strings', function () {
+    $str = "This is a story all\nabout how my life got\nflipped turned upside down and I'd like to take a minute just sit right there I'll tell you how I became the prince of a town called Bel-Air";
+
+    $result = wordwrap($str);
+
+    $mbResult = mb_wordwrap($str);
+
+    expect($mbResult)->toBe($result);
+});
+
 test('will match wordwrap with cut long words enabled', function () {
     $str = "This is a story all about how my life got flippppppppppppppppppppppppped turned upside down and I'd like to take a minute just sit right there I'll tell you how I became the prince of a town called Bel-Air";
 
