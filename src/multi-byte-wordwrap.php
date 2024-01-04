@@ -14,6 +14,7 @@ function mb_wordwrap(
     foreach ($lines as $originalLine) {
         if (mb_strwidth($originalLine) <= $width) {
             $result[] = $originalLine;
+
             continue;
         }
 
