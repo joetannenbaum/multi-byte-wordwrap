@@ -9,16 +9,11 @@ function mb_wordwrap(
     bool $cut_long_words = false
 ): string {
     $lines = explode($break, $string);
-    $result = '';
+    $result = [];
 
     foreach ($lines as $originalLine) {
-        if ($originalLine === '') {
-            $result .= $break . $break;
-            continue;
-        }
-
         if (mb_strwidth($originalLine) <= $width) {
-            $result .= $originalLine . $break;
+            $result[] = $originalLine;
             continue;
         }
 
@@ -30,21 +25,21 @@ function mb_wordwrap(
             foreach ($words as $index => $word) {
                 $characters = mb_str_split($word);
                 $strings = [];
-                $string = '';
+                $str = '';
 
                 foreach ($characters as $character) {
-                    $tmp = $string . $character;
+                    $tmp = $str . $character;
 
                     if (mb_strwidth($tmp) > $width) {
-                        $strings[] = $string;
-                        $string = $character;
+                        $strings[] = $str;
+                        $str = $character;
                     } else {
-                        $string = $tmp;
+                        $str = $tmp;
                     }
                 }
 
-                if ($string !== '') {
-                    $strings[] = $string;
+                if ($str !== '') {
+                    $strings[] = $str;
                 }
 
                 $words[$index] = implode(' ', $strings);
@@ -71,18 +66,18 @@ function mb_wordwrap(
             if ($lineWidth <= $width) {
                 $line = $tmp;
             } else {
-                $result .= $line . $break;
+                $result[] = $line;
                 $line = $word;
                 $lineWidth = $wordWidth;
             }
         }
 
         if ($line !== '') {
-            $result .= $line;
+            $result[] = $line;
         }
 
         $line = null;
     }
 
-    return $result;
+    return implode($break, $result);
 }
