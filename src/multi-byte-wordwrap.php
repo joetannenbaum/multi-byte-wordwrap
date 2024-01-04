@@ -12,7 +12,12 @@ function mb_wordwrap(
     $result = '';
 
     foreach ($lines as $originalLine) {
-        if (mb_strwidth($originalLine) < $width) {
+        if ($originalLine === '') {
+            $result .= $break . $break;
+            continue;
+        }
+
+        if (mb_strwidth($originalLine) <= $width) {
             $result .= $originalLine . $break;
             continue;
         }
@@ -66,10 +71,7 @@ function mb_wordwrap(
             if ($lineWidth <= $width) {
                 $line = $tmp;
             } else {
-                if ($line !== '') {
-                    $result .= $line . $break;
-                }
-
+                $result .= $line . $break;
                 $line = $word;
                 $lineWidth = $wordWidth;
             }
